@@ -1,37 +1,52 @@
+
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+    devtools: { enabled: true },
 
-  typescript: {
-    strict: true,
-    typeCheck: true
-  },
-
-  css: [
-    '~/assets/css/main.css',
-    'primevue/resources/themes/lara-light-blue/theme.css',
-    'primevue/resources/primevue.css',
-    'primeicons/primeicons.css',
-  ],
-
-  build: {
-    transpile: ['primevue']
-  },
-
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
+    modules: [
+        '@primevue/nuxt-module',
+    ],
+    primevue: {
+        options: {
+            ripple: true,
+            inputVariant: 'filled',
+            theme: {
+                options: {
+                    prefix: 'p',
+                    darkModeSelector: 'system',
+                    cssLayer: false
+                }
+            }
+        }
     },
-  },
+    typescript: {
+        strict: true,
+        typeCheck: false
+    },
 
-  app: {
-      head: {
-          link: [{
-              rel: 'stylesheet',
-              href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap'
-          }]
-      }
-  },
+    css: [
+        '~/assets/css/main.css',
+        'primeicons/primeicons.css',
+    ],
 
-  compatibilityDate: '2024-12-07',
+    build: {
+        transpile: ['primevue']
+    },
+
+    postcss: {
+        plugins: {
+            tailwindcss: {},
+            autoprefixer: {},
+        },
+    },
+
+    app: {
+        head: {
+            link: [{
+                rel: 'stylesheet',
+                href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap'
+            }]
+        }
+    },
+
+    compatibilityDate: '2024-12-07',
 })
