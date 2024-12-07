@@ -1,30 +1,36 @@
 <template>
     <div class="relative h-[400px] w-full overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50">
-        <div ref="stackContainer" class="absolute inset-0">
-            <div v-for="(tech, index) in techStack"
-                 :key="tech.name"
-                 class="tech-item absolute opacity-0"
-                 :style="getPosition(index)">
-                <div class="w-12 h-12 relative tech-icon">
-                    <img :src="tech.icon"
-                         :alt="tech.name"
-                         class="w-full h-full object-contain dark:invert" />
+        <!-- Container for all rows -->
+        <div class="absolute inset-0 flex flex-col justify-center gap-12">
+            <!-- Each row is independently managed -->
+            <div v-for="(row, rowIndex) in animatedRows" :key="`row-${rowIndex}`"
+                 class="flex whitespace-nowrap relative"
+                 :class="`scroll-row-${rowIndex % 2 ? 'right' : 'left'}`">
+                <div class="flex gap-12 px-6 absolute" :style="{ left: '0' }">
+                    <div v-for="(tech, techIndex) in row" :key="`${tech.name}-${techIndex}`"
+                         class="tech-item w-12"
+                         @animationiteration="handleIteration(rowIndex, $event)">
+                        <div class="w-12 h-12 relative tech-icon">
+                            <img :src="tech.icon"
+                                 :alt="tech.name"
+                                 class="w-full h-full object-contain dark:invert" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- Gradient overlay -->
         <div class="absolute inset-0 bg-gradient-to-t from-gray-50 dark:from-gray-900/50 to-transparent pointer-events-none"></div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
-import gsap from 'gsap';
+import { ref, onMounted } from 'vue';
 
 interface TechItem {
     name: string;
     icon: string;
 }
-const stackContainer = ref<HTMLElement | null>(null);
 
 const techStack = ref<TechItem[]>([
     { name: 'Vue.js', icon: '/icons/VueDotJS.svg' },
@@ -62,98 +68,71 @@ const techStack = ref<TechItem[]>([
     { name: 'Bootstrap', icon: '/icons/Bootstrap Icon.svg' },
 ]);
 
-const ROWS = 4;
-const COLS = Math.ceil(techStack.value.length / ROWS);
-const SPACING = 100; // Spacing between items in pixels
+const animatedRows = ref<TechItem[][]>([]);
 
-const getPosition = (index: number) => {
-    return {
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)'
-    };
+// Initialize rows with enough items for smooth scrolling
+const initializeRows = () => {
+    const itemsPerRow = Math.ceil(techStack.value.length / 4);
+    animatedRows.value = Array.from({ length: 4 }, (_, index) => {
+        const startIndex = index * itemsPerRow;
+        const rowItems = [...techStack.value.slice(startIndex, startIndex + itemsPerRow)];
+        // Add enough copies to ensure smooth scrolling
+        return [...rowItems, ...rowItems, ...rowItems];
+    });
 };
 
-const createGridAnimation = () => {
-    const elements = stackContainer.value?.querySelectorAll('.tech-item');
-    if (!elements) return;
-
-    // First fade in all items
-    gsap.to(elements, {
-        opacity: 1,
-        duration: 0.5,
-        stagger: 0.05
-    });
-
-    // Calculate initial grid positions
-    elements.forEach((el, index) => {
-        const row = Math.floor(index / COLS);
-        const col = index % COLS;
-
-        // Center the grid
-        const x = (col - (COLS - 1) / 2) * SPACING;
-        const y = (row - (ROWS - 1) / 2) * SPACING;
-
-        gsap.set(el, {
-            x,
-            y,
-            z: 0
-        });
-    });
-
-    // Create the rotating animation
-    const timeline = gsap.timeline({
-        repeat: -1,
-        defaults: { duration: 20, ease: "none" }
-    });
-
-    // Rotate the entire grid
-    timeline.to(elements, {
-        rotate: 360,
-        transformOrigin: "center center",
-        stagger: {
-            each: 0,
-            from: "center"
-        }
-    });
-
-    // Add subtle floating effect
-    elements.forEach((el) => {
-        gsap.to(el, {
-            y: "+=20",
-            duration: gsap.utils.random(2, 3),
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut"
-        });
-    });
+// Handle animation iteration - reorder items without visual interruption
+const handleIteration = (rowIndex: number, event: AnimationEvent) => {
+    // Only handle event from the first item in the row to avoid multiple updates
+    if (event.target === event.currentTarget) {
+        const row = animatedRows.value[rowIndex];
+        const itemsToMove = row.slice(0, row.length / 3);
+        animatedRows.value[rowIndex] = [
+            ...row.slice(row.length / 3),
+            ...itemsToMove
+        ];
+    }
 };
 
 onMounted(() => {
-    createGridAnimation();
-});
-
-onBeforeUnmount(() => {
-    gsap.killTweensOf('.tech-item');
+    initializeRows();
 });
 </script>
 
 <style scoped>
+.scroll-row-left {
+    animation: scrollLeft 20s linear infinite;
+}
+
+.scroll-row-right {
+    animation: scrollRight 20s linear infinite;
+}
+
+@keyframes scrollLeft {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-33.33%); /* Move by 1/3 of the content */
+    }
+}
+
+@keyframes scrollRight {
+    from {
+        transform: translateX(-33.33%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
 .tech-item {
     will-change: transform;
-    transform-style: preserve-3d;
+    pointer-events: none;
 }
 
 /* Fix icon colors in dark mode using invert */
 .dark :deep(img) {
     filter: invert(1);
-}
-
-.tech-icon {
-    transition: transform 0.3s ease;
-}
-
-.tech-icon:hover {
-    transform: scale(1.2);
 }
 </style>
