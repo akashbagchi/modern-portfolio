@@ -13,6 +13,7 @@
     "@primevue/core": "^4.2.4",
     "@primevue/themes": "^4.2.4",
     "@vue/typescript": "^1.8.20",
+    "gsap": "^3.12.5",
     "nuxt": "3.14.1592",
     "primeicons": "^7.0.0",
     "primevue": "^4.2.4",
