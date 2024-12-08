@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useColorMode } from '@vueuse/core'
+import DevBuildNotification from '../components/layout/DevBuildNotification.vue'
 import NavBar from '../components/layout/NavBar.vue'
 
 const colorMode = useColorMode({
@@ -19,11 +20,17 @@ function toggleDarkmode() {
   <div
     class="flex min-h-screen flex-col bg-white text-gray-900 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100"
   >
-    <header
-      class="fixed top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-900/80"
-    >
-      <NavBar @toggle-dark="toggleDarkmode" />
-    </header>
+    <div class="fixed-header-area fixed top-0 z-50 w-full">
+      <header
+        class="border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-900/80"
+      >
+        <NavBar @toggle-dark="toggleDarkmode" />
+      </header>
+
+      <div class="mx-auto w-full max-w-7xl px-4">
+        <DevBuildNotification />
+      </div>
+    </div>
 
     <main class="mx-auto mt-16 w-full max-w-7xl flex-grow px-4">
       <slot />

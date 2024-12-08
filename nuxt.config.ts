@@ -48,5 +48,12 @@ export default defineNuxtConfig({
     },
   },
 
+  runtimeConfig: {
+    public: {
+      environment: import.meta.env.NODE_ENV || 'development',
+      gitBranch: import.meta.env.NUXT_PUBLIC_GIT_BRANCH || 'unknown',
+    },
+  },
+
   compatibilityDate: '2024-12-08',
 })
