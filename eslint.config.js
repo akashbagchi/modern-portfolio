@@ -20,6 +20,7 @@ export default antfu(
           varsIgnorePattern: '^_',
         },
       ],
+      'node/prefer-global/process': 'off',
     },
   },
 )
