@@ -1,52 +1,53 @@
-
 export default defineNuxtConfig({
-    devtools: { enabled: true },
+  devtools: { enabled: true },
 
-    modules: [
-        '@primevue/nuxt-module',
-    ],
-    primevue: {
-        options: {
-            ripple: true,
-            inputVariant: 'filled',
-            theme: {
-                options: {
-                    prefix: 'p',
-                    darkModeSelector: 'system',
-                    cssLayer: false
-                }
-            }
-        }
-    },
-    typescript: {
-        strict: true,
-        typeCheck: false
-    },
+  modules: [
+      '@primevue/nuxt-module',
+  ],
 
-    css: [
-        '~/assets/css/main.css',
-        'primeicons/primeicons.css',
-    ],
+  primevue: {
+      options: {
+          ripple: true,
+          inputVariant: 'filled',
+          theme: {
+              options: {
+                  prefix: 'p',
+                  darkModeSelector: 'system',
+                  cssLayer: false
+              }
+          }
+      }
+  },
 
-    build: {
-        transpile: ['primevue']
-    },
+  typescript: {
+      strict: true,
+      typeCheck: false
+  },
 
-    postcss: {
-        plugins: {
-            tailwindcss: {},
-            autoprefixer: {},
-        },
-    },
+  css: [
+      '~/assets/css/main.css',
+      'primeicons/primeicons.css',
+  ],
 
-    app: {
-        head: {
-            link: [{
-                rel: 'stylesheet',
-                href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap'
-            }]
-        }
-    },
+  build: {
+      transpile: ['primevue']
+  },
 
-    compatibilityDate: '2024-12-07',
+  postcss: {
+      plugins: {
+          tailwindcss: {},
+          autoprefixer: {},
+      },
+  },
+
+  app: {
+      head: {
+          link: [{
+              rel: 'stylesheet',
+              href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap'
+          }]
+      }
+  },
+
+  compatibilityDate: '2024-12-08',
 })
