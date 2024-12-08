@@ -5,9 +5,7 @@ export function useEnvironmentNotification() {
   const config = useRuntimeConfig()
 
   onMounted(() => {
-    const isDevelopment = config.public.environment === 'development'
-    const currentBranch = config.public.gitBranch || 'unknown'
-    showDevNotification.value = isDevelopment || currentBranch !== 'main'
+    showDevNotification.value = config.public.vercelEnv !== 'production'
   })
 
   return {

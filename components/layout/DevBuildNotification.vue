@@ -2,6 +2,8 @@
 import { useEnvironmentNotification } from '../../composables/use-environment-notification'
 
 const { showDevNotification } = useEnvironmentNotification()
+const config = useRuntimeConfig()
+const environment = config.public.vercelDev === 'preview' ? 'preview' : 'development'
 </script>
 
 <template>
@@ -15,7 +17,7 @@ const { showDevNotification } = useEnvironmentNotification()
     <div class="flix items-center gap-2 font-mono text-sm">
       <i class="pi pi-info-circle" />
       <span>
-        You are viewing a development build. Some features may be unfinished or unstable.
+        You are viewing a {{ environment }} build. Some features may be unfinished or unstable.
       </span>
     </div>
   </Message>
