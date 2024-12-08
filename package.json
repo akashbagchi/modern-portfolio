@@ -1,7 +1,8 @@
 {
   "name": "nuxt-app",
-  "private": true,
   "type": "module",
+  "private": true,
+  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -13,7 +14,8 @@
     "clean": "rm -rf .nuxt dist .output node_modules/.vite node_modules/.cache",
     "prepare": "husky install",
     "format": "prettier --write .",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "fix:all": "pnpm format && pnpm lint:fix"
   },
   "dependencies": {
     "@oku-ui/motion": "^0.4.3",
@@ -27,7 +29,6 @@
     "vue": "latest",
     "vue-router": "latest"
   },
-  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c",
   "devDependencies": {
     "@antfu/eslint-config": "^3.11.2",
     "@commitlint/cli": "^19.6.0",
