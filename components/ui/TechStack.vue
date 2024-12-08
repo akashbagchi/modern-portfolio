@@ -7,8 +7,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <template v-for="(category, categoryName) in categorizedTech" :key="categoryName">
                 <div class="tech-category relative p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 overflow-hidden group"
-                    v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0 }"
-                    :delay="150 * Object.keys(categorizedTech).indexOf(categoryName)" @mousemove="handleMouseMove"
+                    @mousemove="handleMouseMove"
                     @mouseleave="handleMouseLeave" :data-category="categoryName">
                     <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                         :style="getGradientStyle(categoryName)"></div>
@@ -22,8 +21,7 @@
                                 class="tech-item flex flex-col items-center gap-2 p-2 rounded-lg transition-all duration-200"
                                 :data-category="categoryName">
                                 <div class="w-8 h-8 relative tech-icon transition-transform duration-200 hover:scale-110"
-                                    v-motion :initial="{ scale: 0.8, opacity: 0 }" :enter="{ scale: 1, opacity: 1 }"
-                                    :delay="100 * category.indexOf(tech)">
+                                    >
                                     <img :src="tech.icon" :alt="tech.name"
                                         class="w-full h-full object-contain dark:invert" />
                                 </div>
@@ -47,7 +45,6 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { Motion } from '@oku-ui/motion';
 
 interface TechItem {
     name: string;
