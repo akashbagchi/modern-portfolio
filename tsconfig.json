@@ -1,10 +1,10 @@
 {
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "strict": true,
-    "skipLibCheck": true,
-    "types": ["@types/node", "@nuxt/types", "primevue"],
+    "target": "ESNext",
     "module": "ESNext",
-    "target": "ESNext"
+    "types": ["@types/node", "@nuxt/types", "primevue"],
+    "strict": true,
+    "skipLibCheck": true
   }
 }
