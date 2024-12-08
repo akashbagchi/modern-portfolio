@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import type { Project } from '../../types/project.ts'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import ProjectCard from '../../components/ui/ProjectCard.vue'
+import { useProjects } from '../../composables/use-projects.ts'
+
+const { projects, loading, error, fetchProjects } = useProjects()
+
+onMounted(() => {
+  fetchProjects()
+})
 
 const projectDetails = ref<Project | null>(null)
 const dialogVisible = computed({
@@ -12,7 +19,7 @@ const dialogVisible = computed({
   },
 })
 
-const projectRepo = [
+/* const projectRepo = [
   {
     title: 'This Portfolio',
     description:
@@ -22,7 +29,7 @@ const projectRepo = [
     expandedContent:
       'Modern, Responsive and Fast Portfolio website built with Nuxt and Vue, and by extending and customizing the PrimeVue component library to create custom, reusable UI components. Deployed on Vercel. For this project, I chose Nuxt for server-side rendering with Vue3, achieving a fully responsive site that can be as dynamic as I want it to be, while maintaining excellent performance.',
   },
-]
+] */
 
 function handleViewDetails(project: Project) {
   projectDetails.value = project
@@ -34,9 +41,17 @@ function handleViewDetails(project: Project) {
     <h1 class="mb-8 font-mono text-3xl font-bold">
       My Projects
     </h1>
-    <div class="projects-grid grid grid-cols-1 gap-6 font-mono md:grid-cols-2">
+    <div v-if="loading" class="flex justify-center py-12">
+      <ProgressSpinner />
+    </div>
+    <div v-else-if="error" class="rounded-lg bg-red-50 p-4 dark:bg-red-900/20">
+      <p class="text-red-700 dark:text-red-300">
+        {{ error }}
+      </p>
+    </div>
+    <div class="projects-grid grid grid-cols-1 gap-6 font-mono md:grid-cols-3">
       <ProjectCard
-        v-for="project in projectRepo"
+        v-for="project in projects"
         :key="project.title"
         :project="project"
         @view-details="handleViewDetails"
@@ -61,7 +76,7 @@ function handleViewDetails(project: Project) {
         <img
           :src="projectDetails.image"
           :alt="projectDetails.title"
-          class="h-64 w-full rounded-lg object-contain"
+          class="h-auto w-full rounded-lg object-cover"
         >
 
         <!-- Technologies -->
@@ -81,7 +96,7 @@ function handleViewDetails(project: Project) {
         </p>
 
         <!-- Project Links -->
-        <div class="flex gap-4 pt-4">
+        <div class="mt-auto flex gap-4 pt-4">
           <Button
             v-if="projectDetails.linkTo"
             label="Visit Project"

@@ -22,11 +22,11 @@ function handleViewDetails() {
 
 <template>
   <div
-    class="ui-project-card w-full rounded-xl border border-gray-200 bg-white transition-all duration-300 hover:border-gray-300 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700 md:w-[420px]"
+    class="ui-project-card rounded-xl border border-gray-200 bg-white transition-all duration-300 hover:border-gray-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:hover:border-gray-700 md:w-[400px]"
   >
     <Card class="overflow-hidden">
       <template #header>
-        <template v-if="imageError">
+        <template v-if="!imageError">
           <img
             :src="project.image"
             :alt="project.title"
@@ -111,6 +111,7 @@ function handleViewDetails() {
   flex-grow: 1;
   padding: 1rem;
   overflow: hidden;
+  margin-top: auto;
 }
 
 :deep(.p-card-title),

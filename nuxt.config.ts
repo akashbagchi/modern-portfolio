@@ -7,7 +7,8 @@ export default defineNuxtConfig({
 
   primevue: {
     options: {
-      theme: 'aura',
+      unstyled: false,
+      theme: 'none',
       ripple: true,
       inputVariant: 'filled',
     },
@@ -46,9 +47,18 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    edgeConfig: import.meta.env.EDGE_CONFIG,
     public: {
       vercelEnv: import.meta.env.VERCEL_ENV || 'development',
     },
+  },
+
+  devServer: {
+    port: 3000,
+  },
+
+  nitro: {
+    debug: true,
   },
 
   compatibilityDate: '2024-12-08',
