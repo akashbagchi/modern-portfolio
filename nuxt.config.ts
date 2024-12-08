@@ -23,7 +23,8 @@ export default defineNuxtConfig({
 
   typescript: {
       strict: true,
-      typeCheck: false
+      typeCheck: true,
+      shim: false
   },
 
   css: [
