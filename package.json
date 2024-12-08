@@ -10,7 +10,6 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
     "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "typecheck": "nuxt typecheck",
     "clean": "rm -rf .nuxt dist .output node_modules/.vite node_modules/.cache"
   },
   "dependencies": {
