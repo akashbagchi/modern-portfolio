@@ -7,15 +7,9 @@ export default defineNuxtConfig({
 
   primevue: {
     options: {
+      theme: 'aura',
       ripple: true,
       inputVariant: 'filled',
-      theme: {
-        options: {
-          prefix: 'p',
-          darkModeSelector: 'system',
-          cssLayer: false,
-        },
-      },
     },
   },
 
@@ -24,7 +18,10 @@ export default defineNuxtConfig({
     typeCheck: false,
   },
 
-  css: ['~/assets/css/main.css', 'primeicons/primeicons.css'],
+  css: [
+    'primeicons/primeicons.css', // PrimeIcons
+    '~/assets/css/main.css', // Tailwind CSS
+  ],
 
   build: {
     transpile: ['primevue'],
