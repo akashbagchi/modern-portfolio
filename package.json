@@ -7,7 +7,11 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
+    "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "typecheck": "vue-tsc --noEmit",
+    "clean": "rm -rf .nuxt dist .output node_modules/.vite node_modules/.cache"
   },
   "dependencies": {
     "@oku-ui/motion": "^0.4.3",
@@ -25,10 +29,16 @@
   "devDependencies": {
     "@primevue/nuxt-module": "^4.2.4",
     "@types/node": "^22.10.1",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
     "@volar/typescript": "2.4.10",
+    "@vue/eslint-config-typescript": "^14.1.4",
     "@vueuse/core": "^12.0.0",
     "@vueuse/nuxt": "^12.0.0",
     "autoprefixer": "^10.4.20",
+    "eslint": "^9.16.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-vue": "^9.32.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.16",
     "typescript": "5.7.2",
