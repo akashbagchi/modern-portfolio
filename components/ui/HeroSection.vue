@@ -35,7 +35,7 @@
         :pt="{
           image: 'w-full max-w-[300px] h-auto',
         }"
-        src="/akashbagchi.png"
+        src="/images/akashbagchi.png"
         alt="Developer Icon"
         image-class="w-full h-auto rounded-full object-cover"
         :preview="false"

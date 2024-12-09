@@ -22,6 +22,7 @@ export default antfu(
       ],
       'node/prefer-global/process': 'off',
       'no-console': 'warn',
+      'func-style': 'off',
     },
   },
 )

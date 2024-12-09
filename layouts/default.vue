@@ -2,6 +2,7 @@
 import { useColorMode } from '@vueuse/core'
 import DevBuildNotification from '../components/layout/DevBuildNotification.vue'
 import NavBar from '../components/layout/NavBar.vue'
+// import '~/assets/css/styles.css'
 
 const colorMode = useColorMode({
   attribute: 'class',
@@ -12,7 +13,7 @@ const colorMode = useColorMode({
 })
 
 function toggleDarkmode() {
-  colorMode.value = colorMode.value === 'dark' ? 'light' : 'dark'
+  colorMode.value = colorMode.value === 'dark' ? '' : 'dark'
 }
 </script>
 
