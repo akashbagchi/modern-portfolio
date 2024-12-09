@@ -19,7 +19,7 @@ const dialogVisible = computed({
   },
 })
 const longDescription = computed(() => {
-  return `${projectDetails.value.description}\n${projectDetails.value.expandedContent}`
+  return `${projectDetails.value.description} \n\n ${projectDetails.value.expandedContent}`
 })
 const longTech = computed(() => {
   if (!projectDetails.value.expandedTech)
@@ -81,7 +81,7 @@ function handleViewDetails(project: Project) {
         </div>
 
         <!-- Expanded Content -->
-        <p class="leading-relaxed text-gray-700 dark:text-gray-300">
+        <p class="whitespace-pre-line leading-relaxed text-gray-700 dark:text-gray-300">
           {{ longDescription }}
         </p>
 

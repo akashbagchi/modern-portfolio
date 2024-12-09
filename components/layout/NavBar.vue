@@ -33,7 +33,9 @@ function toggleDarkmode() {
     class="layout-navbar ml-auto mr-auto border-none shadow-none md:w-3/5"
   >
     <template #start>
-      <span class="font-mono text-xl font-bold text-gray-900 dark:text-gray-100">akash bagchi</span>
+      <a href="/">
+        <span class="font-mono text-xl font-bold text-gray-900 dark:text-gray-100">akash bagchi</span>
+      </a>
     </template>
     <template #item="{ item, props }">
       <router-link v-if="item.to" v-slot="{ href, navigate }" :to="item.to" custom>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-// ..
+function openResume() {
+  window.open('/resume/akashbagchi_resume.pdf', '_blank', 'noopener, noreferrer')
+}
 </script>
 
 <template>
@@ -21,12 +23,20 @@
         technologies.
       </p>
       <div class="hero-buttons mt-auto flex justify-start gap-5">
-        <Button class="resume-button pl-1" label="See my Resume" severity="primary" size="large" />
+        <a href="/projects">
+          <Button
+            class="projects-button px-2"
+            label="See my Projects"
+            severity="primary"
+            size="large"
+          />
+        </a>
         <Button
-          class="projects-button pl-1"
-          label="See my Projects"
-          severity="primary"
+          class="resume-button px-2 py-1"
+          label="See my Resume"
+          severity="contrast"
           size="large"
+          @click="openResume"
         />
       </div>
     </div>
