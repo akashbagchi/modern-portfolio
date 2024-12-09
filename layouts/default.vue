@@ -40,9 +40,20 @@ function toggleDarkmode() {
     </main>
 
     <footer class="w-full border-t border-gray-200 p-4 text-center dark:border-gray-800">
-      <p class="font-mono text-sm text-gray-600 dark:text-gray-400">
-        © {{ new Date().getFullYear() }} Akash Bagchi
-      </p>
+      <div
+        class="flex items-center justify-center gap-4 font-mono text-sm text-gray-600 dark:text-gray-400"
+      >
+        <span> © {{ new Date().getFullYear() }} Akash Bagchi </span>
+        <a
+          href="https://github.com/akashbagchi/modern-portfolio"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-1 transition-colors hover:text-gray-900 dark:hover:text-gray-100"
+        >
+          <i class="pi pi-github" />
+          <span class="ml-1">Source</span>
+        </a>
+      </div>
     </footer>
   </div>
 </template>
