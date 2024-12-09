@@ -1,75 +1,72 @@
-# Nuxt Minimal Starter
+# Modern Portfolio Website
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+> [!WARNING]
+> This project is still a work-in-progress. Notably, the mobile styles haven't been fully configured yet. You are encouraged to create an issue or contact me about bugs or mistakes.
 
-## Setup
+A sophisticated portfolio website showcasing modern web development practices. Built with a focus on user experience, performance, and clean architecture, this project demonstrates expertise in contemporary front-end development and UI/UX design principles.
 
-Make sure to install dependencies:
+## Technical Architecture
 
-```bash
-# npm
-npm install
+This portfolio website is engineered using cutting-edge web technologies, emphasizing type safety, component reusability, and maintainable code architecture:
 
-# pnpm
-pnpm install
+### Frontend Development
 
-# yarn
-yarn install
+The frontend leverages the power of Vue 3's Composition API through Nuxt 3, providing excellent developer ergonomics and runtime performance. Key technical implementations include:
 
-# bun
-bun install
-```
+- Server-side rendering (SSR) for optimal performance and SEO
+- Dark mode support with system preference detection and smooth transitions
+- Responsive design using Tailwind CSS
+- Custom composables for state management and business logic
+- Type-safe component props and events using TypeScript
+- PrimeVue components with custom theming for consistent UI/UX
 
-## Development Server
+### Backend Integration
 
-Start the development server on `http://localhost:3000`:
+The project features a robust backend architecture:
 
-```bash
-# npm
-npm run dev
+- PostgreSQL database hosted on Neon.tech for project data management
+- Drizzle ORM for type-safe database operations
+- RESTful API endpoints built with Nuxt's server handlers
+- Environment-based configuration management
 
-# pnpm
-pnpm dev
+### Development Tooling
 
-# yarn
-yarn dev
+The development environment is configured for maximum productivity and code quality:
 
-# bun
-bun run dev
-```
+- TypeScript for enhanced type safety and developer experience
+- ESLint and Prettier for consistent code style
+- Husky for Git hooks and automated quality checks
+- pnpm for efficient package management
+- Hot module replacement for rapid development
 
-## Production
+## Core Technologies
 
-Build the application for production:
+The website demonstrates proficiency in:
 
-```bash
-# npm
-npm run build
+### Languages and Frameworks
 
-# pnpm
-pnpm build
+- TypeScript/JavaScript
+- Vue 3 with Composition API
+- Nuxt 3
+- Node.js
 
-# yarn
-yarn build
+### Frontend Technologies
 
-# bun
-bun run build
-```
+- Tailwind CSS
+- PrimeVue Component Library
+- CSS3 with custom animations
+- Responsive design principles
 
-Locally preview production build:
+### Backend and Database
 
-```bash
-# npm
-npm run preview
+- PostgreSQL
+- Drizzle ORM
+- RESTful API design
 
-# pnpm
-pnpm preview
+### Development Tools
 
-# yarn
-yarn preview
+- Git version control
+- ESLint/Prettier
+- pnpm package manager
 
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+This portfolio website serves as a practical demonstration of modern web development practices, showcasing my ability to create performant, maintainable, and user-friendly web applications using current industry standards.
