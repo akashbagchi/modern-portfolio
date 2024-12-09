@@ -97,14 +97,14 @@ function handleViewDetails(project: Project) {
 
         <!-- Project Links -->
         <div class="mt-auto flex gap-4 pt-4">
-          <Button
+          <a
             v-if="projectDetails.linkTo"
-            label="Visit Project"
-            icon="pi pi-external-link"
             :href="projectDetails.linkTo"
             target="_blank"
             rel="noopener noreferrer"
-          />
+          >
+            <Button label="Visit Project" icon="pi pi-external-link" />
+          </a>
           <Button
             label="Close"
             icon="pi pi-times"

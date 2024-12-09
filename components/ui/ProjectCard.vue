@@ -22,7 +22,7 @@ function handleViewDetails() {
 
 <template>
   <div
-    class="ui-project-card rounded-xl border border-gray-200 bg-white transition-all duration-300 hover:border-gray-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:hover:border-gray-700 md:w-[400px]"
+    class="ui-project-card flex rounded-xl border border-gray-200 bg-white transition-all duration-300 hover:border-gray-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:hover:border-gray-700 md:w-[400px]"
   >
     <Card class="overflow-hidden">
       <template #header>
@@ -78,15 +78,15 @@ function handleViewDetails() {
             class="w-1/2 flex-1 font-mono"
             @click="handleViewDetails"
           />
-          <Button
+          <a
             v-if="project.linkTo"
-            label="See it live"
             :href="project.linkTo"
             target="_blank"
             rel="noopener noreferrer"
-            class="w-1/2 flex-1 font-mono"
-            link
-          />
+            class="w-1/2 flex-1"
+          >
+            <Button label="See it live" class="w-full font-mono" severity="contrast" />
+          </a>
         </div>
       </template>
     </Card>
@@ -102,6 +102,7 @@ function handleViewDetails() {
 }
 
 :deep(.p-card-body) {
+  height: 100%;
   min-height: 200px;
   display: flex;
   flex-direction: column;
