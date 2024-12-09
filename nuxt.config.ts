@@ -7,15 +7,10 @@ export default defineNuxtConfig({
 
   primevue: {
     options: {
+      unstyled: false,
+      theme: 'none',
       ripple: true,
       inputVariant: 'filled',
-      theme: {
-        options: {
-          prefix: 'p',
-          darkModeSelector: 'system',
-          cssLayer: false,
-        },
-      },
     },
   },
 
@@ -24,7 +19,10 @@ export default defineNuxtConfig({
     typeCheck: false,
   },
 
-  css: ['~/assets/css/main.css', 'primeicons/primeicons.css'],
+  css: [
+    'primeicons/primeicons.css', // PrimeIcons
+    '~/assets/css/main.css', // Tailwind CSS
+  ],
 
   build: {
     transpile: ['primevue'],
@@ -49,9 +47,19 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    adminSecret: process.env.ADMIN_SECRET,
     public: {
       vercelEnv: import.meta.env.VERCEL_ENV || 'development',
+      enableAdmin: process.env.ENABLE_ADMIN === 'true',
     },
+  },
+
+  devServer: {
+    port: 3000,
+  },
+
+  nitro: {
+    debug: true,
   },
 
   compatibilityDate: '2024-12-08',

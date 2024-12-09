@@ -2,6 +2,7 @@
 import { useColorMode } from '@vueuse/core'
 import DevBuildNotification from '../components/layout/DevBuildNotification.vue'
 import NavBar from '../components/layout/NavBar.vue'
+import MobileAlert from '../components/ui/MobileAlert.vue'
 
 const colorMode = useColorMode({
   attribute: 'class',
@@ -12,7 +13,7 @@ const colorMode = useColorMode({
 })
 
 function toggleDarkmode() {
-  colorMode.value = colorMode.value === 'dark' ? 'light' : 'dark'
+  colorMode.value = colorMode.value === 'dark' ? '' : 'dark'
 }
 </script>
 
@@ -31,6 +32,8 @@ function toggleDarkmode() {
         <DevBuildNotification />
       </div>
     </div>
+
+    <MobileAlert />
 
     <main class="mx-auto mt-16 w-full max-w-7xl flex-grow px-4">
       <slot />
