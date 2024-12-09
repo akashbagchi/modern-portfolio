@@ -81,7 +81,8 @@ function handleViewDetails() {
             label="Read More"
             severity="secondary"
             outlined
-            class="w-1/2 flex-1 font-mono"
+            class="w-1/2 font-mono"
+            :class="{ 'flex-1': !project.linkTo }"
             @click="handleViewDetails"
           />
           <a
