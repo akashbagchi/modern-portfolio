@@ -9,7 +9,7 @@ import UnderConstruction from '../components/ui/UnderConstruction.vue'
     </h1>
     <!-- Contact form will go here -->
     <UnderConstruction
-      message="You'll know how to contact me soon, but why don't you try your luck at telepathy! 🧙‍♀️"
+      message="You'll know how to contact me soon, try telepathy in the meantime! 🧙‍♀️"
     />
   </div>
 </template>
