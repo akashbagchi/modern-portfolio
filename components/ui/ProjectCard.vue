@@ -10,6 +10,12 @@ const emits = defineEmits<{
 }>()
 
 const imageError = ref(false)
+const linkType = computed(() => {
+  if (!props.project.linkType) {
+    return 'Preview'
+  }
+  return props.project.linkType
+})
 
 function handleImageError() {
   imageError.value = true
@@ -85,7 +91,12 @@ function handleViewDetails() {
             rel="noopener noreferrer"
             class="w-1/2 flex-1"
           >
-            <Button label="See it live" class="w-full font-mono" severity="contrast" />
+            <Button
+              :label="linkType"
+              icon="pi pi-external-link"
+              class="w-full font-mono"
+              severity="contrast"
+            />
           </a>
         </div>
       </template>

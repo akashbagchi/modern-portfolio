@@ -4,6 +4,7 @@ export interface Project {
   technologies: string[]
   image: string
   expandedContent?: string
+  expandedTech?: string[]
   linkTo?: string
   linkType?: 'Deployment' | 'Case Study' | 'Publication' | 'Article'
 }

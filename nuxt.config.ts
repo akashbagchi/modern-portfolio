@@ -48,8 +48,10 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     edgeConfig: import.meta.env.EDGE_CONFIG,
+    adminSecret: process.env.ADMIN_SECRET,
     public: {
       vercelEnv: import.meta.env.VERCEL_ENV || 'development',
+      enableAdmin: process.env.ENABLE_ADMIN === 'true',
     },
   },
 

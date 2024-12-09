@@ -15,14 +15,21 @@
     "prepare": "husky install",
     "format": "prettier --write .",
     "lint-staged": "lint-staged",
-    "fix:all": "pnpm format && pnpm lint:fix"
+    "fix:all": "pnpm format && pnpm lint:fix",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "dotenv -e .env -- tsx server/db/migrate.ts",
+    "db:push": "drizzle-kit push:pg",
+    "db:studio": "drizzle-kit studio",
+    "test:create-project": "tsx scripts/test-project-creation.ts"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
     "@oku-ui/motion": "^0.4.3",
     "@primevue/core": "^4.2.4",
     "@primevue/themes": "^4.2.4",
     "@vercel/edge-config": "^1.4.0",
     "@vue/typescript": "^1.8.20",
+    "drizzle-orm": "^0.37.0",
     "gsap": "^3.12.5",
     "nuxt": "3.14.1592",
     "primeicons": "^7.0.0",
@@ -44,6 +51,8 @@
     "@vueuse/core": "^12.0.0",
     "@vueuse/nuxt": "^12.0.0",
     "autoprefixer": "^10.4.20",
+    "dotenv-cli": "^7.4.4",
+    "drizzle-kit": "^0.29.1",
     "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-vue": "^9.32.0",
@@ -54,6 +63,7 @@
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwindcss": "^3.4.16",
+    "tsx": "^4.19.2",
     "typescript": "5.7.2",
     "vue-tsc": "2.1.6"
   }

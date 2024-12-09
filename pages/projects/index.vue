@@ -18,18 +18,14 @@ const dialogVisible = computed({
       projectDetails.value = null
   },
 })
-
-/* const projectRepo = [
-  {
-    title: 'This Portfolio',
-    description:
-      'Modern, Responsive and Fast Portfolio website built with Nuxt and Vue, and by extending and customizing the PrimeVue component library to create custom, reusable UI components. Deployed on Vercel.',
-    technologies: ['Vue.js', 'Nuxt.js', 'TypeScript', 'TailwindCSS', 'Vercel'],
-    image: 'images/nuxt-portfolio.jpeg',
-    expandedContent:
-      'Modern, Responsive and Fast Portfolio website built with Nuxt and Vue, and by extending and customizing the PrimeVue component library to create custom, reusable UI components. Deployed on Vercel. For this project, I chose Nuxt for server-side rendering with Vue3, achieving a fully responsive site that can be as dynamic as I want it to be, while maintaining excellent performance.',
-  },
-] */
+const longDescription = computed(() => {
+  return `${projectDetails.value.description}\n${projectDetails.value.expandedContent}`
+})
+const longTech = computed(() => {
+  if (!projectDetails.value.expandedTech)
+    return projectDetails.value.technologies
+  return [...projectDetails.value.technologies, ...projectDetails.value.expandedTech]
+})
 
 function handleViewDetails(project: Project) {
   projectDetails.value = project
@@ -81,18 +77,12 @@ function handleViewDetails(project: Project) {
 
         <!-- Technologies -->
         <div class="flex flex-wrap gap-2">
-          <Tag
-            v-for="tech in projectDetails.technologies"
-            :key="tech"
-            :value="tech"
-            severity="info"
-            class="text-sm"
-          />
+          <Tag v-for="tech in longTech" :key="tech" :value="tech" severity="info" class="text-sm" />
         </div>
 
         <!-- Expanded Content -->
         <p class="leading-relaxed text-gray-700 dark:text-gray-300">
-          {{ projectDetails.expandedContent }}
+          {{ longDescription }}
         </p>
 
         <!-- Project Links -->
