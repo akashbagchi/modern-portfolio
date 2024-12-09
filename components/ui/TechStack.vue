@@ -54,7 +54,7 @@ const techStack = ref<TechItem[]>([
   { name: 'CSS3', icon: '/icons/CSS3 Icon.svg', category: 'Languages' },
   { name: 'JavaScript', icon: '/icons/JavaScript Icon.svg', category: 'Languages' },
   { name: 'Python', icon: '/icons/Python Icon.svg', category: 'Languages' },
-  { name: 'C', icon: '/icons/C Icon.svg', category: 'Languages' },
+  { name: 'C', icon: '/icons/c-icon.svg', category: 'Languages' },
   { name: 'C++', icon: '/icons/Cplusplus Icon.svg', category: 'Languages' },
   { name: 'PHP', icon: '/icons/PHP Icon.svg', category: 'Languages' },
   { name: 'Swift', icon: '/icons/Swift Icon.svg', category: 'Languages' },
