@@ -33,7 +33,10 @@ function toggleDarkmode() {
       </div>
     </div>
 
-    <MobileAlert />
+    <MobileAlert
+      message="Mobile support is currently under development. Some features may not work as expected."
+      class="mobile-alert"
+    />
 
     <main class="mx-auto mt-16 w-full max-w-7xl flex-grow px-4">
       <slot />

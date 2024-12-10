@@ -1,7 +1,19 @@
 <script setup lang="ts">
+import { useColorMode } from '@vueuse/core'
+import { computed, onMounted, ref } from 'vue'
+
 const emit = defineEmits<{
   toggleDark: []
 }>()
+
+const colorMode = useColorMode()
+const isHydrated = ref(false)
+
+onMounted(() => (isHydrated.value = true))
+
+const colorModeIcon = computed(() => {
+  return colorMode.value === 'dark' ? 'pi pi-sun' : 'pi pi-moon'
+})
 
 const menuItems = ref([
   {
@@ -31,6 +43,7 @@ function toggleDarkmode() {
   <MenuBar
     :model="menuItems"
     class="layout-navbar ml-auto mr-auto border-none shadow-none md:w-3/5"
+    role="navigation"
   >
     <template #start>
       <a href="/">
@@ -43,6 +56,7 @@ function toggleDarkmode() {
           v-ripple
           :href="href"
           v-bind="props.action"
+          role="navigation"
           class="font-mono text-gray-700 transition-colors duration-200 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
           @click="navigate"
         >
@@ -52,11 +66,12 @@ function toggleDarkmode() {
     </template>
     <template #end>
       <Button
-        icon="pi pi-moon"
+        v-if="isHydrated"
+        :icon="colorModeIcon"
         text
         rounded
         aria-label="Toggle dark mode"
-        class="!text-gray-700 dark:!text-gray-300"
+        class="!text-gray-700 transition-all dark:!text-gray-300"
         @click="toggleDarkmode"
       />
     </template>
