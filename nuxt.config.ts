@@ -37,6 +37,10 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'en',
+      },
+      title: 'Akash Bagchi | Portfolio',
       link: [
         {
           rel: 'stylesheet',

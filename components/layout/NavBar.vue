@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { useColorMode } from '@vueuse/core'
+import { computed, onMounted, ref } from 'vue'
 
 const emit = defineEmits<{
   toggleDark: []
 }>()
 
 const colorMode = useColorMode()
+const isHydrated = ref(false)
+
+onMounted(() => (isHydrated.value = true))
+
 const colorModeIcon = computed(() => {
   return colorMode.value === 'dark' ? 'pi pi-sun' : 'pi pi-moon'
 })
@@ -61,6 +66,7 @@ function toggleDarkmode() {
     </template>
     <template #end>
       <Button
+        v-if="isHydrated"
         :icon="colorModeIcon"
         text
         rounded

@@ -2,8 +2,8 @@
 import { useMobileAlert } from '~/composables/use-mobile-alert'
 
 defineProps<{
-  message: 'Mobile support is currently under development. Some features may not work as expected.'
-  className: ''
+  message?: 'Mobile support is currently under development. Some features may not work as expected.'
+  class?: ''
 }>()
 
 const { shouldShowAlert, dismissAlert } = useMobileAlert()
