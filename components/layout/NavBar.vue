@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import { useColorMode } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
+import { useMobile } from '../../composables/use-mobile'
 
 const emit = defineEmits<{
   toggleDark: []
 }>()
 
+const { isMobile } = useMobile()
+const isMobileMenuOpen = ref(false)
+
 const colorMode = useColorMode()
 const isHydrated = ref(false)
 
-onMounted(() => (isHydrated.value = true))
+onMounted(() => {
+  isHydrated.value = true
+})
 
 const colorModeIcon = computed(() => {
   return colorMode.value === 'dark' ? 'pi pi-sun' : 'pi pi-moon'
@@ -29,6 +35,10 @@ const menuItems = ref([
     to: '/about',
   },
   {
+    label: 'Garden',
+    to: 'https://garden.akashbagchi.xyz',
+  },
+  {
     label: 'Contact',
     to: '/contact',
   },
@@ -36,6 +46,18 @@ const menuItems = ref([
 
 function toggleDarkmode() {
   emit('toggleDark')
+}
+
+function openMobileNavMenu() {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+function handleMobileNavigation(to: string) {
+  isMobileMenuOpen.value = false
+  if (to.startsWith('https://'))
+    navigateTo(to, { external: true })
+
+  navigateTo(to)
 }
 </script>
 
@@ -46,6 +68,15 @@ function toggleDarkmode() {
     role="navigation"
   >
     <template #start>
+      <Button
+        v-if="isMobile"
+        aria-label="Toggle Mobile Menu"
+        icon="pi pi-bars"
+        text
+        rounded
+        class="!text-gray-700 transition-all dark:!text-gray-300"
+        @click="openMobileNavMenu"
+      />
       <a href="/">
         <span class="font-mono text-xl font-bold text-gray-900 dark:text-gray-100">akash bagchi</span>
       </a>
@@ -76,10 +107,35 @@ function toggleDarkmode() {
       />
     </template>
   </MenuBar>
+  <Drawer
+    v-model:visible="isMobileMenuOpen"
+    :modal="true"
+    :dismissable="true"
+    class="mobile-nav-drawer"
+  >
+    <template #header>
+      <div class="flex items-start justify-start">
+        <h2 class="font-mono text-xl font-bold">
+          Navigation
+        </h2>
+      </div>
+    </template>
+
+    <div class="mobile-nav-menu mt-5 flex flex-col gap-2">
+      <Button
+        v-for="item in menuItems"
+        :key="item.to"
+        v-ripple
+        :label="item.label"
+        text
+        class="mobile-nav-item justify-start p-0 font-mono"
+        @click="handleMobileNavigation(item.to)"
+      />
+    </div>
+  </Drawer>
 </template>
 
 <style>
-/* Using higher specificity to override PrimeVue styles */
 .p-menubar.p-menubar {
   background: transparent !important;
   padding: 1rem !important;
@@ -102,7 +158,6 @@ function toggleDarkmode() {
 }
 
 :root {
-  /* Override PrimeVue theme variables */
   --menubar-padding: 1rem;
 }
 
@@ -112,5 +167,47 @@ function toggleDarkmode() {
 
 .dark .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link:not(.p-disabled):hover {
   background: #1f2937 !important;
+}
+
+.mobile-nav-drawer .p-drawer-content {
+  @apply bg-white dark:bg-gray-900;
+}
+
+.mobile-nav-drawer .p-drawer-header {
+  @apply border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900;
+  padding: 1rem;
+}
+
+.mobile-nav-item.p-button.p-button-text {
+  @apply text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800;
+  padding: 1rem;
+}
+
+.mobile-nav-item.p-button.p-button-text:hover {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+.mobile-nav-item .p-button-label {
+  @apply ml-3;
+}
+
+.p-drawer-mask {
+  @apply bg-gray-900/50 backdrop-blur-sm;
+}
+
+.mobile-nav-item.p-button:focus {
+  box-shadow: none !important;
+  @apply ring-2 ring-primary-500;
+}
+
+@media (max-width: 768px) {
+  .p-menubar {
+    display: flex;
+    justify-content: space-between;
+  }
+  .p-menubar .p-menubar-root-list,
+  .p-menubar .p-menubar-button {
+    display: none;
+  }
 }
 </style>
