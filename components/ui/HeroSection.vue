@@ -16,13 +16,19 @@ function openResume() {
       class="hero-content col-span-1 flex flex-col justify-start align-top md:col-span-2 md:mr-5"
     >
       <div class="mobile-photo-container" />
-      <h1 class="name-large mb-10 pr-10 text-4xl font-bold text-gray-900 dark:text-gray-100">
+      <h1
+        class="name-large mb-10 px-4 text-center text-4xl font-bold text-gray-900 dark:text-gray-100 md:px-0 md:pr-10 md:text-start"
+      >
         Hello, I'm Akash Bagchi
       </h1>
-      <p class="hero-shorttext mb-6 text-xl text-gray-700 dark:text-gray-300">
+      <p
+        class="hero-shorttext mb-6 text-center text-gray-700 dark:text-gray-300 md:text-start md:text-xl"
+      >
         Front-End Focused Full-Stack Developer, UX Designer, Generalist.
       </p>
-      <p class="hero-shorttext mb-6 text-xl text-gray-700 dark:text-gray-300">
+      <p
+        class="hero-shorttext md:[text-xl] mb-6 text-center text-sm text-gray-700 dark:text-gray-300 md:text-start"
+      >
         I make fully-fledged websites like this one using a variety of modern frameworks and
         technologies.
       </p>

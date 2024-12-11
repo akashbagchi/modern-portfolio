@@ -7,12 +7,10 @@ interface TechItem {
   category: 'Languages' | 'Frameworks' | 'Databases' | 'Tools'
 }
 
-// Mouse position state
 const mouseX = ref(0)
 const mouseY = ref(0)
 const isHovering = ref(false)
 
-// Gradient colors for each category
 const categoryColors = {
   Languages: 'rgba(59, 130, 246, 0.1)', // Blue
   Frameworks: 'rgba(16, 185, 129, 0.1)', // Green
@@ -20,7 +18,6 @@ const categoryColors = {
   Tools: 'rgba(245, 158, 11, 0.1)', // Amber
 } as const
 
-// Compute gradient style based on mouse position
 function getGradientStyle(category: string) {
   if (!isHovering.value)
     return {}
@@ -36,7 +33,6 @@ function getGradientStyle(category: string) {
   }
 }
 
-// Handle mouse movement
 function handleMouseMove(event: MouseEvent) {
   const rect = (event.currentTarget as HTMLElement).getBoundingClientRect()
   mouseX.value = event.clientX - rect.left
@@ -44,7 +40,6 @@ function handleMouseMove(event: MouseEvent) {
   isHovering.value = true
 }
 
-// Handle mouse leave
 function handleMouseLeave() {
   isHovering.value = false
 }
@@ -100,7 +95,7 @@ const categorizedTech = computed(() => {
 <template>
   <div class="flex w-full max-w-4xl flex-col">
     <div
-      class="tech-stack-explainer md:[w-3/5 mx-auto mb-2 mb-5 justify-center font-mono text-sm text-gray-900 dark:text-gray-100"
+      class="tech-stack-explainer md:[w-3/5] mx-auto mb-5 justify-center text-center font-mono text-sm text-gray-900 dark:text-gray-100"
     >
       My technology stack is varied and expansive, and ever growing. Here's some of it:
     </div>
