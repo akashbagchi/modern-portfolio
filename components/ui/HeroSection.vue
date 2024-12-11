@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useMobile } from '../../composables/use-mobile.ts'
+
+const { isMobile } = useMobile()
+
 function openResume() {
   window.open('/resume/akashbagchi_resume.pdf', '_blank', 'noopener, noreferrer')
 }
@@ -11,7 +15,7 @@ function openResume() {
     <div
       class="hero-content col-span-1 flex flex-col justify-start align-top md:col-span-2 md:mr-5"
     >
-      <!-- Text content, buttons go here -->
+      <div class="mobile-photo-container" />
       <h1 class="name-large mb-10 pr-10 text-4xl font-bold text-gray-900 dark:text-gray-100">
         Hello, I'm Akash Bagchi
       </h1>
@@ -22,10 +26,11 @@ function openResume() {
         I make fully-fledged websites like this one using a variety of modern frameworks and
         technologies.
       </p>
-      <div class="hero-buttons mt-auto flex justify-start gap-5">
+      <div class="hero-buttons mt-auto flex justify-evenly gap-5 md:justify-start">
         <a href="/projects">
           <Button
             class="projects-button px-2"
+            :class="{ 'mb-2 flex-shrink-0 p-2 text-sm': isMobile }"
             label="See my Projects"
             severity="primary"
             size="large"
@@ -33,6 +38,7 @@ function openResume() {
         </a>
         <Button
           class="resume-button px-2 py-1"
+          :class="{ 'mb-2 flex-shrink-0 p-2 text-sm': isMobile }"
           label="See my Resume"
           severity="contrast"
           size="large"
@@ -41,15 +47,23 @@ function openResume() {
       </div>
     </div>
     <div class="about-icon h-full! col-span-1">
-      <Image
-        :pt="{
-          image: 'w-full max-w-[300px] h-auto',
-        }"
-        src="/images/akashbagchi.png"
-        alt="Developer Icon"
-        image-class="w-full h-auto rounded-full object-cover"
-        :preview="false"
-      />
+      <Teleport to=".mobile-photo-container" :disabled="!isMobile">
+        <Image
+          :pt="
+            isMobile
+              ? {
+                image: 'w-full max-w-[180px] h-auto mx-auto mb-8',
+              }
+              : {
+                image: 'w-full max-w-[300px] h-auto',
+              }
+          "
+          src="/images/akashbagchi.png"
+          alt="Developer Icon"
+          image-class="w-full h-auto rounded-full object-cover"
+          :preview="false"
+        />
+      </Teleport>
     </div>
   </div>
 </template>
