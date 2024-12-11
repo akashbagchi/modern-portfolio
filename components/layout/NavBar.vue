@@ -3,6 +3,12 @@ import { useColorMode } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
 import { useMobile } from '../../composables/use-mobile'
 
+interface Route {
+  label: string
+  to: string
+  external: boolean
+}
+
 const emit = defineEmits<{
   toggleDark: []
 }>()
@@ -21,26 +27,31 @@ const colorModeIcon = computed(() => {
   return colorMode.value === 'dark' ? 'pi pi-sun' : 'pi pi-moon'
 })
 
-const menuItems = ref([
+const menuItems = ref<Route[]>([
   {
     label: 'Home',
     to: '/',
+    external: false,
   },
   {
     label: 'Projects',
     to: '/projects',
+    external: false,
   },
   {
     label: 'About',
     to: '/about',
-  },
-  {
-    label: 'Garden',
-    to: 'https://garden.akashbagchi.xyz',
+    external: false,
   },
   {
     label: 'Contact',
     to: '/contact',
+    external: false,
+  },
+  {
+    label: 'Blog',
+    to: 'https://garden.akashbagchi.xyz',
+    external: true,
   },
 ])
 
@@ -52,12 +63,22 @@ function openMobileNavMenu() {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
 }
 
-function handleMobileNavigation(to: string) {
-  isMobileMenuOpen.value = false
-  if (to.startsWith('https://'))
-    navigateTo(to, { external: true })
+function closeMobileMenu() {
+  setTimeout(() => {
+    isMobileMenuOpen.value = false
+  }, 0)
+}
 
-  navigateTo(to)
+function handleMobileNavigation(item: Route) {
+  if (item.external) {
+    window.open(item.to, '_blank', 'noopener, noreferrer')
+    closeMobileMenu()
+  }
+  else {
+    const router = useRouter()
+    router.replace(item.to)
+    closeMobileMenu()
+  }
 }
 </script>
 
@@ -82,7 +103,18 @@ function handleMobileNavigation(to: string) {
       </a>
     </template>
     <template #item="{ item, props }">
-      <router-link v-if="item.to" v-slot="{ href, navigate }" :to="item.to" custom>
+      <a
+        v-if="item.external"
+        v-ripple
+        :href="item.to"
+        v-bind="props.action"
+        target="_blank"
+        rel="noreferrer noopener"
+        class="font-mono text-gray-700 transition-colors duration-200 hover:text-gray-900 dark:hover:text-gray-100"
+      >
+        <span>{{ item.label }}</span>
+      </a>
+      <router-link v-else v-slot="{ href, navigate }" :to="item.to" custom>
         <a
           v-ripple
           :href="href"
@@ -129,7 +161,7 @@ function handleMobileNavigation(to: string) {
         :label="item.label"
         text
         class="mobile-nav-item justify-start p-0 font-mono"
-        @click="handleMobileNavigation(item.to)"
+        @click="handleMobileNavigation(item)"
       />
     </div>
   </Drawer>
