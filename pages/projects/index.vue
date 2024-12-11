@@ -59,6 +59,7 @@ function handleViewDetails(project: Project) {
       :modal="true"
       :style="{ width: '50rem' }"
       :dismissable-mask="true"
+      :maximizable="true"
       class="project-dialog"
     >
       <template v-if="projectDetails" #header>
@@ -68,24 +69,20 @@ function handleViewDetails(project: Project) {
       </template>
 
       <div v-if="projectDetails" class="space-y-6 font-mono">
-        <!-- Project Image -->
         <img
           :src="projectDetails.image"
           :alt="projectDetails.title"
           class="h-auto w-full rounded-lg object-cover"
         >
 
-        <!-- Technologies -->
         <div class="flex flex-wrap gap-2">
           <Tag v-for="tech in longTech" :key="tech" :value="tech" severity="info" class="text-sm" />
         </div>
 
-        <!-- Expanded Content -->
         <p class="whitespace-pre-line leading-relaxed text-gray-700 dark:text-gray-300">
           {{ longDescription }}
         </p>
 
-        <!-- Project Links -->
         <div class="mt-auto flex gap-4 pt-4">
           <a
             v-if="projectDetails.linkTo"
@@ -130,6 +127,22 @@ function handleViewDetails(project: Project) {
 :deep(.p-dialog-content) {
   @apply bg-white dark:bg-gray-900;
   padding: 1.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+:deep(.p-dialog-content::-webkit-scrollbar) {
+  width: 6px;
+}
+:deep(.p-dialog-content::-webkit-scrollbar-track) {
+  background: transparent;
+}
+:deep(.p-dialog-content::-webkit-scrollbar-thumb) {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 20px;
+
+  &:hover {
+    background-color: rgba(156, 163, 175, 0.7);
+  }
 }
 
 :deep(.p-dialog-mask) {
