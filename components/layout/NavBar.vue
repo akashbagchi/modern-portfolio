@@ -3,12 +3,6 @@ import { useColorMode } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
 import { useMobile } from '../../composables/use-mobile'
 
-interface Route {
-  label: string
-  to: string
-  external: boolean
-}
-
 const emit = defineEmits<{
   toggleDark: []
 }>()
@@ -27,31 +21,22 @@ const colorModeIcon = computed(() => {
   return colorMode.value === 'dark' ? 'pi pi-sun' : 'pi pi-moon'
 })
 
-const menuItems = ref<Route[]>([
+const menuItems = ref([
   {
     label: 'Home',
     to: '/',
-    external: false,
   },
   {
     label: 'Projects',
     to: '/projects',
-    external: false,
   },
   {
     label: 'About',
     to: '/about',
-    external: false,
   },
   {
     label: 'Contact',
     to: '/contact',
-    external: false,
-  },
-  {
-    label: 'Blog',
-    to: 'https://garden.akashbagchi.xyz',
-    external: true,
   },
 ])
 
@@ -69,16 +54,9 @@ function closeMobileMenu() {
   }, 0)
 }
 
-function handleMobileNavigation(item: Route) {
-  if (item.external) {
-    window.open(item.to, '_blank', 'noopener, noreferrer')
-    closeMobileMenu()
-  }
-  else {
-    const router = useRouter()
-    router.replace(item.to)
-    closeMobileMenu()
-  }
+function handleNavigation(to: string) {
+  closeMobileMenu()
+  navigateTo(to)
 }
 </script>
 
@@ -102,30 +80,15 @@ function handleMobileNavigation(item: Route) {
         <span class="font-mono text-xl font-bold text-gray-900 dark:text-gray-100">akash bagchi</span>
       </a>
     </template>
-    <template #item="{ item, props }">
+    <template #item="{ item }">
       <a
-        v-if="item.external"
         v-ripple
         :href="item.to"
-        v-bind="props.action"
-        target="_blank"
-        rel="noreferrer noopener"
-        class="font-mono text-gray-700 transition-colors duration-200 hover:text-gray-900 dark:hover:text-gray-100"
+        role="menuitem"
+        class="font-mono text-gray-700 transition-colors duration-200 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
       >
         <span>{{ item.label }}</span>
       </a>
-      <router-link v-else v-slot="{ href, navigate }" :to="item.to" custom>
-        <a
-          v-ripple
-          :href="href"
-          v-bind="props.action"
-          role="navigation"
-          class="font-mono text-gray-700 transition-colors duration-200 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
-          @click="navigate"
-        >
-          <span>{{ item.label }}</span>
-        </a>
-      </router-link>
     </template>
     <template #end>
       <Button
@@ -161,7 +124,7 @@ function handleMobileNavigation(item: Route) {
         :label="item.label"
         text
         class="mobile-nav-item justify-start p-0 font-mono"
-        @click="handleMobileNavigation(item)"
+        @click="handleNavigation(item.to)"
       />
     </div>
   </Drawer>
