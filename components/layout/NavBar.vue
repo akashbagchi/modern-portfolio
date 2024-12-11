@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useColorMode } from '@vueuse/core'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useMobile } from '../../composables/use-mobile'
 
 const emit = defineEmits<{
@@ -9,6 +9,7 @@ const emit = defineEmits<{
 
 const { isMobile } = useMobile()
 const isMobileMenuOpen = ref(false)
+const router = useRouter() // Add router composable
 
 const colorMode = useColorMode()
 const isHydrated = ref(false)
@@ -48,16 +49,12 @@ function openMobileNavMenu() {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
 }
 
-function closeMobileMenu() {
-  setTimeout(() => {
+watch(
+  () => router.currentRoute.value,
+  () => {
     isMobileMenuOpen.value = false
-  }, 0)
-}
-
-function handleNavigation(to: string) {
-  closeMobileMenu()
-  navigateTo(to)
-}
+  },
+)
 </script>
 
 <template>
@@ -76,19 +73,20 @@ function handleNavigation(to: string) {
         class="!text-gray-700 transition-all dark:!text-gray-300"
         @click="openMobileNavMenu"
       />
-      <a href="/">
+      <NuxtLink to="/" class="no-underline">
         <span class="font-mono text-xl font-bold text-gray-900 dark:text-gray-100">akash bagchi</span>
-      </a>
+      </NuxtLink>
     </template>
     <template #item="{ item }">
-      <a
+      <NuxtLink
         v-ripple
-        :href="item.to"
+        :to="item.to"
         role="menuitem"
         class="font-mono text-gray-700 transition-colors duration-200 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
+        external
       >
         <span>{{ item.label }}</span>
-      </a>
+      </NuxtLink>
     </template>
     <template #end>
       <Button
@@ -117,15 +115,17 @@ function handleNavigation(to: string) {
     </template>
 
     <div class="mobile-nav-menu mt-5 flex flex-col gap-2">
-      <Button
+      <NuxtLink
         v-for="item in menuItems"
         :key="item.to"
         v-ripple
+        :to="item.to"
         :label="item.label"
-        text
-        class="mobile-nav-item justify-start p-0 font-mono"
-        @click="handleNavigation(item.to)"
-      />
+        class="mobile-nav-item justify-start p-4 font-mono"
+        external
+      >
+        <span>{{ item.label }}</span>
+      </NuxtLink>
     </div>
   </Drawer>
 </template>
