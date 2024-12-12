@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useColorMode } from '@vueuse/core'
-import DevBuildNotification from '../components/layout/DevBuildNotification.vue'
 import NavBar from '../components/layout/NavBar.vue'
-import MobileAlert from '../components/ui/MobileAlert.vue'
 
 const colorMode = useColorMode({
   attribute: 'class',
@@ -28,15 +26,15 @@ function toggleDarkmode() {
         <NavBar @toggle-dark="toggleDarkmode" />
       </header>
 
-      <div class="mx-auto w-full max-w-7xl px-4">
+      <!-- <div class="mx-auto w-full max-w-7xl px-4">
         <DevBuildNotification />
-      </div>
+      </div> -->
     </div>
 
-    <MobileAlert
+    <!-- <MobileAlert
       message="Mobile support is currently under development. Some features may not work as expected."
       class="mobile-alert"
-    />
+      /> -->
 
     <main class="mx-auto mt-16 w-full max-w-7xl flex-grow px-4">
       <slot />
