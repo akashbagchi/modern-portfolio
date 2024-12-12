@@ -3,7 +3,7 @@ export default defineNuxtConfig({
 
   ssr: true,
 
-  modules: ['@primevue/nuxt-module'],
+  modules: ['@primevue/nuxt-module', '@nuxt/image'],
 
   primevue: {
     options: {
@@ -45,6 +45,16 @@ export default defineNuxtConfig({
         {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap',
+        },
+      ],
+      script: [
+        {
+          children: `
+            if (localStorage.getItem('color-scheme') === 'dark' || (!localStorage.getItem('color-scheme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+              document.documentElement.classList.add('dark');
+            }
+          `,
+          type: 'text/javascript',
         },
       ],
     },

@@ -1,18 +1,24 @@
 <script setup lang="ts">
-import { useColorMode } from '@vueuse/core'
+import { watch } from 'vue'
 import NavBar from '../components/layout/NavBar.vue'
+import { useTheme } from '../composables/use-theme.ts'
 
-const colorMode = useColorMode({
-  attribute: 'class',
-  modes: {
-    dark: 'dark',
-    light: '',
-  },
+const { colorMode, toggleTheme } = useTheme()
+
+onMounted(() => {
+  if (process.client) {
+    const storedTheme = localStorage.getItem('color-scheme')
+    if (storedTheme) {
+      colorMode.value = storedTheme
+    }
+  }
 })
 
-function toggleDarkmode() {
-  colorMode.value = colorMode.value === 'dark' ? '' : 'dark'
-}
+watch(colorMode, (newValue) => {
+  if (process.client) {
+    localStorage.setItem('color-scheme', newValue)
+  }
+})
 </script>
 
 <template>
@@ -23,7 +29,7 @@ function toggleDarkmode() {
       <header
         class="border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-900/80"
       >
-        <NavBar @toggle-dark="toggleDarkmode" />
+        <NavBar @toggle-dark="toggleTheme" />
       </header>
 
       <!-- <div class="mx-auto w-full max-w-7xl px-4">

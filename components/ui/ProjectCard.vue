@@ -33,12 +33,16 @@ function handleViewDetails() {
     <Card class="overflow-hidden">
       <template #header>
         <template v-if="!imageError">
-          <img
+          <NuxtImg
+            v-if="!imageError"
             :src="project.image"
             :alt="project.title"
+            format="webp"
+            loading="lazy"
+            quality="90"
             class="h-48 w-full object-cover"
             @error="handleImageError"
-          >
+          />
         </template>
         <div
           v-else

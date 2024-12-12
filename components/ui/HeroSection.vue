@@ -73,35 +73,24 @@ onMounted(() => {
             'mb-8': isMobile,
           }"
         >
-          <Image
-            :pt="
-              isMobile
-                ? {
-                  image: 'w-full max-w-[180px] h-auto mx-auto mb-8',
-                }
-                : {
-                  image: 'w-full max-w-[300px] h-auto',
-                }
-            "
-            src="/images/akashbagchi.png"
-            alt="Developer Icon"
-            image-class="w-full h-auto rounded-full object-cover"
-            :preview="false"
-          />
+          <div
+            class="relative aspect-square"
+            :class="[isMobile ? 'mx-auto mb-8 w-full max-w-[180px]' : 'w-full max-w-[300px]']"
+          >
+            <NuxtImg
+              src="/images/akashbagchi.png"
+              alt="Developer Icon"
+              format="webp"
+              loading="lazy"
+              class="h-full w-full rounded-full object-cover transition-transform duration-300"
+              sizes="(max-width: 758px) 180px, 300px"
+              quality="100"
+            />
+          </div>
         </div>
       </Teleport>
     </div>
   </div>
 </template>
 
-<style scoped>
-:deep(.p-image) {
-  width: 100%;
-  max-width: 300px;
-}
-
-:deep(.p-image img) {
-  width: 100%;
-  height: auto;
-}
-</style>
+<style scoped></style>
