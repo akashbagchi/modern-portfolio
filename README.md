@@ -1,7 +1,7 @@
 # Modern Portfolio Website
 
 > [!WARNING]
-> This project is still a work-in-progress. Notably, the mobile styles haven't been fully configured yet. You are encouraged to create an issue or contact me about bugs or mistakes.
+> This project is still a work-in-progress. You are encouraged to create an issue or contact me about bugs or mistakes.
 
 A sophisticated portfolio website showcasing modern web development practices. Built with a focus on user experience, performance, and clean architecture, this project demonstrates expertise in contemporary front-end development and UI/UX design principles.
 
