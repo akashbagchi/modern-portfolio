@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
+    "@nuxt/image": "1.8.1",
     "@oku-ui/motion": "^0.4.3",
     "@primevue/core": "^4.2.4",
     "@primevue/themes": "^4.2.4",
