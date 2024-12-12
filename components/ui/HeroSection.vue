@@ -50,7 +50,7 @@ onMounted(() => {
               class="projects-button px-2"
               :class="{ 'mb-2 flex-shrink-0 p-2 text-sm': isMobile }"
               label="See my Projects"
-              aria-label="Navigate to projects"
+              aria-label="See my Projects - Navigate to projects"
               severity="primary"
               size="large"
             />
@@ -59,7 +59,7 @@ onMounted(() => {
             class="resume-button px-2 py-1"
             :class="{ 'mb-2 flex-shrink-0 p-2 text-sm': isMobile }"
             label="See my Resume"
-            aria-label="Open resume in new tab"
+            aria-label="See my Resume - Open resume in new tab"
             severity="contrast"
             size="large"
             @click="openResume"

@@ -26,22 +26,22 @@ const menuItems = ref([
   {
     label: 'Home',
     to: '/',
-    ariaLabel: 'Navigate to the home page',
+    ariaLabel: 'Home - Navigate to the home page',
   },
   {
     label: 'Projects',
     to: '/projects',
-    ariaLabel: 'Navigate to the projects page',
+    ariaLabel: 'Projects - Navigate to the projects page',
   },
   {
     label: 'About',
     to: '/about',
-    ariaLabel: 'Navigate to the about page',
+    ariaLabel: 'About - Navigate to the about page',
   },
   {
     label: 'Contact',
     to: '/contact',
-    ariaLabel: 'Navigate to the contact page',
+    ariaLabel: 'Contact - Navigate to the contact page',
   },
 ])
 
