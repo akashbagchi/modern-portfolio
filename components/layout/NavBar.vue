@@ -26,18 +26,22 @@ const menuItems = ref([
   {
     label: 'Home',
     to: '/',
+    ariaLabel: 'Home - Navigate to the home page',
   },
   {
     label: 'Projects',
     to: '/projects',
+    ariaLabel: 'Projects - Navigate to the projects page',
   },
   {
     label: 'About',
     to: '/about',
+    ariaLabel: 'About - Navigate to the about page',
   },
   {
     label: 'Contact',
     to: '/contact',
+    ariaLabel: 'Contact - Navigate to the contact page',
   },
 ])
 
@@ -73,7 +77,7 @@ watch(
         class="!text-gray-700 transition-all dark:!text-gray-300"
         @click="openMobileNavMenu"
       />
-      <NuxtLink to="/" class="no-underline">
+      <NuxtLink to="/" aria-label="Home" class="no-underline">
         <span class="font-mono text-xl font-bold text-gray-900 dark:text-gray-100">akash bagchi</span>
       </NuxtLink>
     </template>
@@ -81,7 +85,8 @@ watch(
       <NuxtLink
         v-ripple
         :to="item.to"
-        role="menuitem"
+        role="navigation"
+        :aria-label="item.ariaLabel"
         class="font-mono text-gray-700 transition-colors duration-200 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
         external
       >
@@ -105,6 +110,8 @@ watch(
     :modal="true"
     :dismissable="true"
     class="mobile-nav-drawer"
+    role="dialog"
+    aria-label="Mobile navigation menu"
   >
     <template #header>
       <div class="flex items-start justify-start">
@@ -114,13 +121,14 @@ watch(
       </div>
     </template>
 
-    <div class="mobile-nav-menu mt-5 flex flex-col gap-2">
+    <div class="mobile-nav-menu mt-5 flex flex-col gap-2" aria-labelledby="mobile-nav-title">
       <NuxtLink
         v-for="item in menuItems"
         :key="item.to"
         v-ripple
         :to="item.to"
         :label="item.label"
+        :aria-label="item.ariaLabel"
         class="mobile-nav-item justify-start p-4 font-mono"
         external
       >
