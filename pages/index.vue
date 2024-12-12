@@ -1,9 +1,16 @@
 <script setup lang="ts">
+import { nextTick, onMounted } from 'vue'
 import HeroSection from '../components/ui/HeroSection.vue'
 import TechStack from '../components/ui/TechStack.vue'
 import { useMobile } from '../composables/use-mobile.ts'
 
 const { isMobile } = useMobile()
+
+onMounted(() => {
+  nextTick(() => {
+    document.body.style.removeProperty('overflow')
+  })
+})
 </script>
 
 <template>
