@@ -81,7 +81,6 @@ onMounted(() => {
               src="/images/akashbagchi.png"
               alt="Developer Icon"
               format="webp"
-              loading="lazy"
               class="h-full w-full rounded-full object-cover transition-transform duration-300"
               sizes="(max-width: 758px) 180px, 300px"
               quality="100"
