@@ -3,7 +3,7 @@ import UnderConstruction from '../components/ui/UnderConstruction.vue'
 </script>
 
 <template>
-  <div class="mx-auto max-w-4xl py-12">
+  <div class="mx-auto max-w-4xl py-12 font-mono">
     <h1 class="mb-8 text-3xl font-bold">
       Contact
     </h1>
