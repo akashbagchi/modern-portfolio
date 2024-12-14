@@ -83,7 +83,6 @@ watch(
     </template>
     <template #item="{ item }">
       <NuxtLink
-        v-ripple
         :to="item.to"
         role="navigation"
         :aria-label="item.ariaLabel"
