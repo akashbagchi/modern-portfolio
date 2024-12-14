@@ -22,6 +22,7 @@ export default defineNuxtConfig({
   css: [
     'primeicons/primeicons.css', // PrimeIcons
     '~/assets/css/main.css', // Tailwind CSS
+    '~/assets/css/fonts.css',
   ],
 
   build: {
@@ -41,12 +42,6 @@ export default defineNuxtConfig({
         lang: 'en',
       },
       title: 'Akash Bagchi | Portfolio',
-      link: [
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap',
-        },
-      ],
       script: [
         {
           children: `
