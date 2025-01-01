@@ -1,69 +1,148 @@
 # Modern Portfolio Website
 
-A sophisticated portfolio website showcasing modern web development practices. Built with a focus on user experience, performance, and clean architecture, this project demonstrates expertise in contemporary front-end development and UI/UX design principles.
+A sophisticated, minimalist portfolio website showcasing modern web development practices. Built with Nuxt 3 and PrimeVue, this project demonstrates expertise in contemporary front-end development while maintaining a focus on performance, accessibility, and user experience.
 
-## Technical Architecture
+## Technical Overview
 
-This portfolio website is engineered using cutting-edge web technologies, emphasizing type safety, component reusability, and maintainable code architecture:
+### Core Features
 
-### Frontend Development
+- 🎨 Sleek, minimalist design with dark mode support
+- 📱 Mobile-first, responsive layout
+- ⚡️ Server-side rendering (SSR) for optimal performance
+- 🔒 Type-safe development with TypeScript
+- 🎯 Component-driven architecture
+- 🌐 REST API integration with Neon PostgreSQL
+- 🔄 Smooth transitions and animations
+- 🎁 Rich interactive components using PrimeVue
 
-The frontend leverages the power of Vue 3's Composition API through Nuxt 3, providing excellent developer ergonomics and runtime performance. Key technical implementations include:
+### Technology Stack
 
-- Server-side rendering (SSR) for optimal performance and SEO
-- Dark mode support with system preference detection and smooth transitions
-- Responsive design using Tailwind CSS
-- Custom composables for state management and business logic
-- Type-safe component props and events using TypeScript
-- PrimeVue components with custom theming for consistent UI/UX
+#### Frontend
 
-### Backend Integration
+- **Framework**: Nuxt 3 (v3.14)
+- **UI Components**: PrimeVue 4.2
+- **Styling**:
+  - Tailwind CSS 3.4
+  - CSS3 with custom animations
+  - PrimeIcons for iconography
+- **State Management**: Vue 3 Composition API with custom composables
+- **Motion**: GSAP for advanced animations
 
-The project features a robust backend architecture:
+#### Backend
 
-- PostgreSQL database hosted on Neon.tech for project data management
-- Drizzle ORM for type-safe database operations
-- RESTful API endpoints built with Nuxt's server handlers
-- Environment-based configuration management
+- **Database**: Neon PostgreSQL (serverless)
+- **ORM**: Drizzle ORM
+- **API**: Nuxt server handlers
+- **Edge Config**: Vercel Edge Config for runtime configuration
 
-### Development Tooling
+#### Development Tools
 
-The development environment is configured for maximum productivity and code quality:
+- **Package Manager**: pnpm 9.15
+- **Type Checking**: TypeScript 5.7
+- **Code Quality**:
+  - ESLint 9.16 with @antfu/eslint-config
+  - Prettier 3.4
+  - Husky for Git hooks
+- **Build Tools**: Vite (via Nuxt)
 
-- TypeScript for enhanced type safety and developer experience
-- ESLint and Prettier for consistent code style
-- Husky for Git hooks and automated quality checks
-- pnpm for efficient package management
-- Hot module replacement for rapid development
+## Project Structure
 
-## Core Technologies
+```
+modern-portfolio/
+├── components/           # Reusable Vue components
+│   ├── layout/          # Layout components (Navbar, notifications)
+│   └── ui/              # UI components (ProjectCard, TechStack, etc.)
+├── composables/         # Shared composition logic
+├── layouts/             # Page layouts
+├── pages/              # Route pages
+├── server/             # Backend API and database
+│   ├── api/            # API endpoints
+│   └── db/             # Database configuration and schema
+├── public/             # Static assets
+└── types/              # TypeScript type definitions
+```
 
-The website demonstrates proficiency in:
+## Key Features
 
-### Languages and Frameworks
+### Responsive Design
 
-- TypeScript/JavaScript
-- Vue 3 with Composition API
-- Nuxt 3
-- Node.js
+- Mobile-first approach with adaptive layouts
+- Custom mobile navigation with smooth transitions
+- Responsive image handling with optimized loading
 
-### Frontend Technologies
+### User Experience
 
-- Tailwind CSS
-- PrimeVue Component Library
-- CSS3 with custom animations
-- Responsive design principles
+- Dark mode with system preference detection
+- Smooth page transitions
+- Progressive loading states
+- Mobile-specific alerts and notifications
 
-### Backend and Database
+### Performance Optimization
 
-- PostgreSQL
-- Drizzle ORM
-- RESTful API design
+- Server-side rendering for initial page loads
+- Optimized asset loading
+- Efficient state management with Vue 3 Composition API
+- Smart caching strategies for API calls
 
-### Development Tools
+### Developer Experience
 
-- Git version control
-- ESLint/Prettier
-- pnpm package manager
+- Type-safe development with TypeScript
+- Modular component architecture
+- Custom composables for shared logic
+- Consistent code style with ESLint and Prettier
 
-This portfolio website serves as a practical demonstration of modern web development practices, showcasing my ability to create performant, maintainable, and user-friendly web applications using current industry standards.
+## Getting Started
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Start production server
+pnpm preview
+
+# Run linting
+pnpm lint
+
+# Format code
+pnpm format
+```
+
+## Database Operations
+
+```bash
+# Generate migrations
+pnpm db:generate
+
+# Run migrations
+pnpm db:migrate
+
+# Push schema changes
+pnpm db:push
+
+# Open database UI
+pnpm db:studio
+```
+
+## Environment Configuration
+
+The application uses various environment variables for configuration:
+
+- `DATABASE_URL`: Neon PostgreSQL connection string
+- `ADMIN_SECRET`: Admin authentication secret
+- `VERCEL_ENV`: Deployment environment
+- `ENABLE_ADMIN`: Feature flag for admin functionality
+
+## Deployment
+
+The application is configured for deployment on Vercel with:
+
+- Automatic preview deployments for PRs
+- Environment-specific builds
+- Edge configuration support
+- Serverless PostgreSQL integration
