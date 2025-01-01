@@ -1,10 +1,9 @@
 ---
 name: Improvement
 about: Describe an improvement or feature to enhance the performance of the app
-title: "[IMPROVEMENT]"
+title: '[IMPROVEMENT]'
 labels: feat ✨
 assignees: akashbagchi
-
 ---
 
 **Category: ** eg. Performance, Style
