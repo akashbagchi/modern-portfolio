@@ -4,10 +4,11 @@ import { computed, onMounted, ref } from 'vue'
 import ProjectCard from '../../components/ui/ProjectCard.vue'
 import { useProjects } from '../../composables/use-projects.ts'
 
-const { projects, loading, error, fetchProjects } = useProjects()
+const { projects, loading, error, refresh, isCacheStale } = useProjects()
 
-onMounted(() => {
-  fetchProjects()
+onMounted(async () => {
+  if (isCacheStale())
+    await refresh()
 })
 
 const projectDetails = ref<Project | null>(null)
@@ -19,9 +20,11 @@ const dialogVisible = computed({
   },
 })
 const longDescription = computed(() => {
-  return `${projectDetails.value.description} \n\n ${projectDetails.value.expandedContent}`
+  return `${projectDetails.value.description} \n\n ${projectDetails.value.expandedContent}` ?? ''
 })
 const longTech = computed(() => {
+  if (!projectDetails.value)
+    return []
   if (!projectDetails.value.expandedTech)
     return projectDetails.value.technologies
   return [...projectDetails.value.technologies, ...projectDetails.value.expandedTech]
@@ -30,13 +33,35 @@ const longTech = computed(() => {
 function handleViewDetails(project: Project) {
   projectDetails.value = project
 }
+
+const refreshing = ref(false)
+async function handleRefresh() {
+  refreshing.value = true
+  try {
+    await refresh()
+  }
+  finally {
+    refreshing.value = false
+  }
+}
 </script>
 
 <template>
   <div class="mx-auto max-w-7xl py-12">
-    <h1 class="mb-8 font-mono text-3xl font-bold">
-      My Projects
-    </h1>
+    <div class="mb-8 flex items-center justify-between">
+      <h1 class="mb-8 font-mono text-3xl font-bold">
+        My Projects
+      </h1>
+      <Button
+        v-if="!loading"
+        icon="pi pi-refresh"
+        :loading="refreshing"
+        rounded
+        text
+        aria-label="Refresh Projects"
+        @click="handleRefresh"
+      />
+    </div>
     <div v-if="loading" class="flex justify-center py-12">
       <ProgressSpinner />
     </div>
@@ -45,7 +70,15 @@ function handleViewDetails(project: Project) {
         {{ error }}
       </p>
     </div>
-    <div class="projects-grid grid grid-cols-1 gap-6 font-mono md:grid-cols-3">
+    <div
+      v-else-if="!projects?.length"
+      class="rounded-lg bg-gray-50 p-4 text-center dark:bg-gray-900/20"
+    >
+      <p class="text-gray-700 dark:text-gray-300">
+        No Projects Found
+      </p>
+    </div>
+    <div v-else class="projects-grid grid grid-cols-1 gap-6 font-mono md:grid-cols-3">
       <ProjectCard
         v-for="project in projects"
         :key="project.title"
