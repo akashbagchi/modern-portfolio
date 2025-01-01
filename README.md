@@ -2,7 +2,6 @@
 
 A sophisticated, minimalist portfolio website showcasing modern web development practices. Built with Nuxt 3 and PrimeVue, this project demonstrates expertise in contemporary front-end development while maintaining a focus on performance, accessibility, and user experience.
 
-
 ## Technical Overview
 
 ### Core Features
