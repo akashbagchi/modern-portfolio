@@ -4,11 +4,13 @@ import { computed, onMounted, ref } from 'vue'
 import ProjectCard from '../../components/ui/ProjectCard.vue'
 import { useProjects } from '../../composables/use-projects.ts'
 
+const isInitalLoad = ref(true)
 const { projects, loading, error, refresh, isCacheStale } = useProjects()
 
 onMounted(async () => {
   if (isCacheStale())
     await refresh()
+  isInitalLoad.value = false
 })
 
 const projectDetails = ref<Project | null>(null)
@@ -52,17 +54,19 @@ async function handleRefresh() {
       <h1 class="mb-8 font-mono text-3xl font-bold">
         My Projects
       </h1>
-      <Button
-        v-if="!loading"
-        icon="pi pi-refresh"
-        :loading="refreshing"
-        rounded
-        text
-        aria-label="Refresh Projects"
-        @click="handleRefresh"
-      />
+      <ClientOnly>
+        <Button
+          v-if="!loading"
+          icon="pi pi-refresh"
+          :loading="refreshing"
+          rounded
+          text
+          aria-label="Refresh Projects"
+          @click="handleRefresh"
+        />
+      </ClientOnly>
     </div>
-    <div v-if="loading" class="flex justify-center py-12">
+    <div v-if="loading || isInitalLoad" class="flex justify-center py-12">
       <ProgressSpinner />
     </div>
     <div v-else-if="error" class="rounded-lg bg-red-50 p-4 dark:bg-red-900/20">
