@@ -17,7 +17,7 @@ const experience = ref<WorkExperience[]>([
     company: 'LaKeel, Inc',
     location: 'Tokyo, Japan',
     from: 'Dec 2023',
-    to: 'present',
+    to: 'May 2025',
     description: 'Core developer for LaKeel Visual Mosaic and UI/UX Task Team lead',
     responsibilities: [
       'Core Developer - LaKeel Visual Mosaic (low-code enterprise development platform)',
