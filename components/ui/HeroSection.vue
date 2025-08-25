@@ -44,7 +44,9 @@ onMounted(() => {
           I make fully-fledged websites like this one using a variety of modern frameworks and
           technologies.
         </p>
-        <p>
+        <p
+          class="hero-shorttext md:[text-xl] mb-6 text-center text-sm text-gray-700 dark:text-gray-300 md:text-start"
+        >
           I'm currenly pursuing a Master in Computer Science at Arizona State University's Ira A.
           Fulton School of Engineering
         </p>
