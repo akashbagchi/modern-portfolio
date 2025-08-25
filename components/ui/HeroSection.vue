@@ -44,6 +44,10 @@ onMounted(() => {
           I make fully-fledged websites like this one using a variety of modern frameworks and
           technologies.
         </p>
+        <p>
+          I'm currenly pursuing a Master in Computer Science at Arizona State University's Ira A.
+          Fulton School of Engineering
+        </p>
         <div class="hero-buttons mt-auto flex justify-evenly gap-5 md:justify-start">
           <a href="/projects">
             <Button
