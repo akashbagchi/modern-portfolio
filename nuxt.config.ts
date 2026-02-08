@@ -56,6 +56,7 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    resendApiKey: process.env.RESEND_API_KEY,
     adminSecret: process.env.ADMIN_SECRET,
     public: {
       vercelEnv: import.meta.env.VERCEL_ENV || 'development',
