@@ -35,6 +35,7 @@
     "nuxt": "3.14.1592",
     "primeicons": "^7.0.0",
     "primevue": "^4.2.4",
+    "resend": "^6.9.1",
     "tailwindcss-primeui": "^0.3.4",
     "vue": "latest",
     "vue-router": "latest"
